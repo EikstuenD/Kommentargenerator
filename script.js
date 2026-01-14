@@ -1,37 +1,49 @@
-// STANDARD DATA 
-// format: low (må jobbes med), med (greit/godkjent), high (meget bra)
+// DATA DATA STRUKTUR
+// low: Må jobbes med | med: Godt/Greit | high: Fremragende
 const defaultData = [
     {
-        category: "Struktur",
+        category: "Struktur & Oppbygning",
         items: [
             { 
                 label: "Innledning", 
-                low: "Innledningen var noe uklar og manglet en tydelig presentasjon av temaet.", 
-                med: "Innledningen var grei og presenterte temaet.", 
-                high: "Du hadde en engasjerende innledning som tydelig presenterte problemstillingen." 
+                low: "Innledningen var noe utydelig. Prøv å definere problemstillingen klarere.", 
+                med: "Du hadde en grei innledning som presenterte temaet.", 
+                high: "Du fanget oppmerksomheten umiddelbart med en tydelig og engasjerende innledning." 
             },
             { 
                 label: "Rød tråd", 
-                low: "Strukturen fremstod noe rotete, og det var vanskelig å følge resonnementene.", 
-                med: "Presentasjonen hadde en grei struktur som var mulig å følge.", 
-                high: "Presentasjonen hadde en meget god struktur og logisk oppbygning." 
+                low: "Det var litt vanskelig å følge strukturen i presentasjonen.", 
+                med: "Presentasjonen hadde en logisk oppbygning.", 
+                high: "Veldig god struktur og rød tråd gjennom hele foredraget." 
+            },
+            { 
+                label: "Avslutning", 
+                low: "Presentasjonen sluttet litt brått uten oppsummering.", 
+                med: "Du rundet av greit med en oppsummering.", 
+                high: "Du hadde en svært god konklusjon som samlet trådene." 
             }
         ]
     },
     {
-        category: "Innhold",
+        category: "Faglig innhold",
         items: [
             { 
-                label: "Faglig forståelse", 
-                low: "Innholdet bar preg av opplesning og manglet dybde.", 
-                med: "Du viser faglig forståelse, men kunne forklart mer med egne ord.", 
-                high: "Du viser svært god faglig forståelse og forklarer komplekse sammenhenger godt." 
+                label: "Forståelse", 
+                low: "Du leste mye opp fakta uten å forklare så mye med egne ord.", 
+                med: "Du viser god faglig forståelse.", 
+                high: "Du viser svært høy faglig kompetanse og forklarer komplekse ting på en enkel måte." 
+            },
+            { 
+                label: "Relevans", 
+                low: "Du sporet litt av i forhold til oppgaveteksten.", 
+                med: "Du holdt deg fint til temaet.", 
+                high: "Veldig relevant innhold som svarte presist på problemstillingen." 
             },
             { 
                 label: "Kildebruk", 
-                low: "Kildehenvisninger manglet eller var mangelfulle.", 
+                low: "Husk å oppgi kilder tydeligere.", 
                 med: "Kildebruken var godkjent.", 
-                high: "Du har svært god oversikt over kildene og bruker dem aktivt i presentasjonen." 
+                high: "Meget god og ryddig kildebruk." 
             }
         ]
     },
@@ -40,15 +52,15 @@ const defaultData = [
         items: [
             { 
                 label: "Blikkontakt", 
-                low: "Du var svært bundet til manuset.", 
-                med: "Du hadde noe blikkontakt, men leste en del fra manus.", 
-                high: "Du var løsrevet fra manus og hadde god kontakt med publikum." 
+                low: "Du var veldig bundet til manuset.", 
+                med: "Du hadde noe blikkontakt, men så også en del i papirene.", 
+                high: "Du var helt løsrevet fra manus og hadde super kontakt med publikum." 
             },
             { 
                 label: "Stemmebruk", 
-                low: "Det var vanskelig å høre hva du sa til tider.", 
-                med: "Du snakker tydelig nok.", 
-                high: "Du har en tydelig stemme og bruker tempo og pauser virkningsfullt." 
+                low: "Prøv å snakke høyere og tydeligere neste gang.", 
+                med: "Du snakker tydelig og greit.", 
+                high: "Du bruker stemmen aktivt og variert for å holde på oppmerksomheten." 
             }
         ]
     }
@@ -56,31 +68,36 @@ const defaultData = [
 
 let formData = [];
 
+// Når siden lastes
 window.onload = function() {
     loadData();
     renderForm();
 };
 
 function loadData() {
-    const saved = localStorage.getItem('presFormData_v2'); // Ny nøkkel pga ny struktur
+    // Vi bruker nøkkelen 'pres_data_v3' for å sikre at vi ikke henter gamle datafeil
+    const saved = localStorage.getItem('pres_data_v3'); 
+    
     if (saved) {
         formData = JSON.parse(saved);
     } else {
+        // Hvis ingen data finnes, last standard
         formData = JSON.parse(JSON.stringify(defaultData));
     }
 }
 
 function saveData() {
-    localStorage.setItem('presFormData_v2', JSON.stringify(formData));
+    localStorage.setItem('pres_data_v3', JSON.stringify(formData));
     renderForm();
 }
 
-// TEGNE SKJEMA MED 3 VALG
+// TEGNE SKJEMAET (Dette lager HTML-en automatisk)
 function renderForm() {
     const container = document.getElementById('formContainer');
-    container.innerHTML = "";
+    container.innerHTML = ""; // Tømmer beholderen først
 
     formData.forEach((cat, catIndex) => {
+        // Lag overskrift for kategori (f.eks "Struktur")
         const catDiv = document.createElement('div');
         catDiv.className = "category";
         
@@ -88,21 +105,23 @@ function renderForm() {
         h3.innerText = cat.category;
         catDiv.appendChild(h3);
 
+        // Lag hver linje med 3 valg
         cat.items.forEach((item, itemIndex) => {
             const row = document.createElement('div');
             row.className = "item-row";
 
-            // Unikt navn for radiogruppen per punkt
+            // Unikt navn for radiogruppen slik at de henger sammen
             const groupName = `grp_${catIndex}_${itemIndex}`;
 
+            // Selve navnet på punktet (f.eks "Blikkontakt")
             const label = document.createElement('span');
             label.className = "item-label";
             label.innerText = item.label;
 
+            // De tre knappene
             const radioGroup = document.createElement('div');
             radioGroup.className = "radio-group";
             
-            // Lag 3 radio buttons: Lav, Middels, Høy
             radioGroup.innerHTML = `
                 <label><input type="radio" name="${groupName}" value="low"> Må jobbes med</label>
                 <label><input type="radio" name="${groupName}" value="med"> Godt</label>
@@ -124,16 +143,17 @@ function generateComment() {
     const topic = document.getElementById('topic').value.trim() || "temaet";
     
     let parts = [];
-    parts.push(`Hei ${name}. Vurdering av presentasjon om ${topic}.`);
+    parts.push(`Hei ${name}. Her er en tilbakemelding på din presentasjon om ${topic}.`);
 
+    // Gå gjennom alle punktene og sjekk hva som er valgt
     formData.forEach((cat, catIndex) => {
         cat.items.forEach((item, itemIndex) => {
             const groupName = `grp_${catIndex}_${itemIndex}`;
             const checked = document.querySelector(`input[name="${groupName}"]:checked`);
             
             if (checked) {
-                // Hent tekst basert på valgt nivå (low/med/high)
-                const val = checked.value; 
+                const val = checked.value; // 'low', 'med', eller 'high'
+                // Legg til teksten som hører til valget
                 if (item[val]) {
                     parts.push(item[val]);
                 }
@@ -141,17 +161,26 @@ function generateComment() {
         });
     });
 
+    // Legg til karakter hvis valgt
     const grade = document.querySelector('input[name="grade"]:checked');
     if (grade) {
         parts.push(`\nKarakter: ${grade.value}`);
+    } else {
+        parts.push("\nLykke til videre!");
     }
 
+    // Sett sammen teksten med mellomrom
     document.getElementById('resultOutput').value = parts.join(" ");
 }
 
 // REDIGERING
 function toggleEditMode() {
-    document.getElementById('editPanel').classList.toggle('hidden');
+    const panel = document.getElementById('editPanel');
+    if (panel.style.display === "block") {
+        panel.style.display = "none";
+    } else {
+        panel.style.display = "block";
+    }
 }
 
 function addItem() {
@@ -162,35 +191,41 @@ function addItem() {
     const high = document.getElementById('textHigh').value.trim();
 
     if (!catName || !label || !low || !med || !high) {
-        alert("Alle felt må fylles ut.");
+        alert("Alle felt må fylles ut for å legge til.");
         return;
     }
 
+    // Sjekk om kategorien finnes fra før
     let category = formData.find(c => c.category.toLowerCase() === catName.toLowerCase());
+    
+    // Hvis ikke, lag ny kategori
     if (!category) {
         category = { category: catName, items: [] };
         formData.push(category);
     }
 
+    // Legg til det nye punktet
     category.items.push({ label, low, med, high });
     saveData();
+    
+    alert("Punkt lagt til!");
     
     // Tøm feltene
     document.getElementById('newLabel').value = "";
     document.getElementById('textLow').value = "";
     document.getElementById('textMed').value = "";
     document.getElementById('textHigh').value = "";
-    alert("Punkt lagt til.");
 }
 
 function resetToDefault() {
-    if(confirm("Dette sletter dine endringer og laster standardsettet. Sikker?")) {
-        localStorage.removeItem('presFormData_v2');
+    if(confirm("Er du sikker? Dette sletter alle dine egne kategorier og gjenoppretter standard.")) {
+        localStorage.removeItem('pres_data_v3');
         loadData();
         renderForm();
     }
 }
 
+// RESET SKJEMA (Fjerner avkrysninger)
 function resetForm() {
     document.getElementById('studentName').value = "";
     document.getElementById('topic').value = "";
