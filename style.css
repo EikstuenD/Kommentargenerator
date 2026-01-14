@@ -1,13 +1,13 @@
 :root {
     --primary: #333;
-    --bg: #f0f2f5;
+    --bg: #f5f5f5;
     --white: #fff;
-    --border: #ccc;
-    --blue: #0056b3;
+    --border: #ddd;
+    --blue: #2271b1;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg);
     margin: 0;
     padding: 20px;
@@ -18,8 +18,9 @@ body {
     max-width: 800px;
     margin: 0 auto;
     background: var(--white);
-    padding: 20px;
+    padding: 30px;
     border: 1px solid var(--border);
+    border-radius: 4px;
 }
 
 header {
@@ -27,77 +28,85 @@ header {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #eee;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
 }
 
-h1 { font-size: 24px; margin: 0; }
-h3 { font-size: 18px; margin-bottom: 10px; margin-top: 20px; }
+h1 { font-size: 22px; margin: 0; }
+h3 { font-size: 16px; margin: 20px 0 10px 0; color: #444; border-bottom: 1px solid #eee; padding-bottom: 5px;}
 
 /* Inputs */
-.input-group, .edit-panel {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
+.input-group { display: flex; gap: 10px; margin-bottom: 20px; }
 input[type="text"] {
     flex: 1;
     padding: 10px;
-    border: 1px solid var(--border);
-    min-width: 200px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    font-size: 14px;
 }
 
 /* Edit Panel */
-.edit-panel {
-    background: #eef;
-    padding: 15px;
-    border: 1px solid #ccd;
-    display: block;
-}
+.edit-panel { background: #eef; padding: 15px; border: 1px solid #ccd; margin-bottom: 20px;}
+.edit-panel input { width: 100%; margin-bottom: 10px; box-sizing: border-box; }
+.input-row { display: flex; gap: 10px; }
 .hidden { display: none; }
+.info-text { font-size: 12px; color: #666; margin-top: -10px; margin-bottom: 10px;}
 
-/* Categories */
-.category { margin-bottom: 20px; }
-.category h3 { color: var(--blue); border-bottom: 1px solid #eee; }
+/* Skjema-punkter (Radio buttons) */
+.item-row {
+    background: #fafafa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+}
 
-label {
-    display: block;
-    margin: 8px 0;
+.item-label { font-weight: bold; font-size: 14px; margin-bottom: 8px; display: block;}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+.radio-group label {
+    font-size: 13px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* Grade Section */
 .grade-options {
     display: flex;
     gap: 15px;
-    padding: 10px;
-    background: #fafafa;
+    padding: 15px;
+    background: #f8f8f8;
     border: 1px solid #eee;
 }
-.grade-options label { margin: 0; font-weight: bold; }
+.grade-options label { font-weight: bold; cursor: pointer; }
 
 /* Buttons */
-.buttons { margin-top: 20px; display: flex; gap: 10px; }
+.buttons { margin-top: 25px; display: flex; gap: 10px; }
 button {
     padding: 10px 20px;
     cursor: pointer;
     border: none;
+    border-radius: 3px;
     font-size: 14px;
 }
-.btn-generate { background: var(--blue); color: white; flex: 2; }
+.btn-generate { background: var(--blue); color: white; flex: 2; font-weight: bold;}
 .btn-reset { background: #666; color: white; }
 .btn-copy { background: #28a745; color: white; width: 100%; margin-top: 10px; }
-.btn-edit { background: transparent; color: #666; text-decoration: underline; }
-.btn-add { background: var(--blue); color: white; width: 100%; margin-top: 10px;}
-.btn-danger { background: #d9534f; color: white; width: 100%; margin-top: 5px; }
+.btn-edit { background: none; color: #666; text-decoration: underline; padding: 0;}
+.btn-add { background: var(--blue); color: white; width: 100%; }
+.btn-danger { background: #d63638; color: white; width: 100%; margin-top: 5px; }
 
-/* Output */
 textarea {
     width: 100%;
     margin-top: 20px;
     padding: 10px;
-    border: 1px solid var(--border);
+    border: 1px solid #999;
     font-family: inherit;
     box-sizing: border-box; 
+    font-size: 14px;
 }
