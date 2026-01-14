@@ -14,18 +14,25 @@
             <button onclick="toggleEditMode()" class="btn-edit">Rediger skjema</button>
         </header>
 
-        <!-- REDIGERINGSMODUS (Skjult som standard) -->
+        <!-- REDIGERINGSMODUS -->
         <div id="editPanel" class="edit-panel hidden">
             <h3>Legg til nytt punkt</h3>
+            <p class="info-text">Fyll inn teksten som skal genereres for hvert nivå.</p>
+            
             <input type="text" id="newCatName" placeholder="Kategorinavn (f.eks. Kroppsspråk)">
-            <input type="text" id="newLabel" placeholder="Hva ser du etter? (f.eks. God holdning)">
-            <input type="text" id="newYes" placeholder="Tekst hvis JA (Mestret)">
-            <input type="text" id="newNo" placeholder="Tekst hvis NEI (Tips)">
-            <button onclick="addItem()" class="btn-add">Legg til i skjema</button>
-            <button onclick="resetToDefault()" class="btn-danger">Tilbakestill til standard</button>
+            <input type="text" id="newLabel" placeholder="Stikkord (f.eks. Blikkontakt)">
+            
+            <div class="input-row">
+                <input type="text" id="textLow" placeholder="Tekst ved Lav måloppnåelse">
+                <input type="text" id="textMed" placeholder="Tekst ved Middels måloppnåelse">
+                <input type="text" id="textHigh" placeholder="Tekst ved Høy måloppnåelse">
+            </div>
+
+            <button onclick="addItem()" class="btn-add">Legg til</button>
+            <button onclick="resetToDefault()" class="btn-danger">Tilbakestill alt til standard</button>
         </div>
 
-        <!-- GENERELT -->
+        <!-- ELEV INFO -->
         <div class="input-group">
             <input type="text" id="studentName" placeholder="Elevens navn">
             <input type="text" id="topic" placeholder="Tema">
@@ -33,12 +40,12 @@
 
         <!-- DYNAMISK SKJEMA -->
         <div id="formContainer">
-            <!-- Her settes sjekklistene inn av script.js -->
+            <!-- Fylles av script.js -->
         </div>
 
         <!-- KARAKTER -->
         <div class="grade-section">
-            <h3>Karakterforslag</h3>
+            <h3>Karakter</h3>
             <div class="grade-options">
                 <label><input type="radio" name="grade" value="1"> 1</label>
                 <label><input type="radio" name="grade" value="2"> 2</label>
@@ -51,7 +58,7 @@
 
         <!-- KNAPPER -->
         <div class="buttons">
-            <button onclick="generateComment()" class="btn-generate">Generer kommentar</button>
+            <button onclick="generateComment()" class="btn-generate">Generer tekst</button>
             <button onclick="resetForm()" class="btn-reset">Nullstill</button>
         </div>
 
