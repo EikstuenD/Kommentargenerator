@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kommentargenerator for Presentasjoner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Presentasjonstilbakemelding</h1>
+            <p>Fyll inn navn, tema og huk av for det eleven mestret.</p>
+        </header>
+
+        <!-- INFO OM ELEVEN -->
+        <div class="input-group">
+            <input type="text" id="studentName" placeholder="Elevens navn">
+            <input type="text" id="topic" placeholder="Tema for presentasjonen">
+        </div>
+
+        <!-- SJEKKLISTE -->
+        <form id="feedbackForm">
+            
+            <div class="category">
+                <h3>1. Struktur & Oppbygning</h3>
+                <label><input type="checkbox" id="structure_intro"> Tydelig innledning og problemstilling</label>
+                <label><input type="checkbox" id="structure_thread"> Rød tråd og logisk rekkefølge</label>
+                <label><input type="checkbox" id="structure_conclusion"> God oppsummering/avslutning</label>
+            </div>
+
+            <div class="category">
+                <h3>2. Faglig innhold</h3>
+                <label><input type="checkbox" id="content_depth"> Viser faglig forståelse (ikke bare opplisting)</label>
+                <label><input type="checkbox" id="content_relevance"> Holder seg til temaet</label>
+                <label><input type="checkbox" id="content_sources"> God kildebruk og kildehenvisning</label>
+            </div>
+
+            <div class="category">
+                <h3>3. Framføring</h3>
+                <label><input type="checkbox" id="delivery_voice"> Tydelig stemme og tempo</label>
+                <label><input type="checkbox" id="delivery_contact"> Blikkkontakt med publikum (løsrevet fra manus)</label>
+                <label><input type="checkbox" id="delivery_aids"> Gode visuelle hjelpemidler (f.eks. PowerPoint)</label>
+            </div>
+
+        </form>
+
+        <!-- KNAPPER -->
+        <div class="buttons">
+            <button onclick="generateComment()" class="btn-generate">Generer kommentar</button>
+            <button onclick="resetForm()" class="btn-reset">Nullstill</button>
+        </div>
+
+        <!-- RESULTAT -->
+        <div class="output-area">
+            <h3>Ferdig kommentar:</h3>
+            <textarea id="resultOutput" rows="12"></textarea>
+            <button onclick="copyText()" class="btn-copy">Kopier til utklippstavle</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
