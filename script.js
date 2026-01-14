@@ -39,10 +39,10 @@ const defaultData = [
                 high: "var innholdet veldig relevant og svarte presist på problemstillingen" 
             },
             { 
-                label: "Kildebruk", 
-                low: "må du huske å oppgi kilder tydeligere", 
-                med: "var kildebruken godkjent", 
-                high: "viste du en meget god og ryddig kildebruk" 
+                label: "Kildekritikk", 
+                low: "du viser at du ikke helt vet hvordan du skal være kildekritisk", 
+                med: "du viser delvis at du kan antyde om en kilde er god eller ikke", 
+                high: "du viser at du forstår kildekritikk ganske godt, og kan vurdere om kilder er gode eller ikke" 
             }
         ]
     },
