@@ -6,6 +6,7 @@
     --blue: #0056b3;
     --green: #27ae60;
     --light-gray: #f9fafb;
+    --question-bg: #e3f2fd; /* Lys blå bakgrunn for spørsmål */
 }
 
 body {
@@ -35,7 +36,7 @@ header {
 }
 
 h1 { font-size: 24px; margin: 0; }
-h3 { font-size: 18px; color: var(--blue); margin: 20px 0 10px 0; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+h3 { font-size: 18px; color: var(--blue); margin: 0 0 10px 0; }
 
 /* Input felter */
 .input-group { display: flex; gap: 15px; margin-bottom: 30px; }
@@ -52,9 +53,12 @@ input[type="text"] {
 .edit-panel input { width: 100%; margin-bottom: 10px; box-sizing: border-box; }
 .input-row { display: flex; gap: 10px; }
 .hidden { display: none; }
-.info-text { font-size: 13px; color: #555; margin-top: -5px; margin-bottom: 15px; }
+.info-text { font-size: 13px; color: #555; margin-bottom: 10px; display: block; }
 
-/* Selve skjemaet (Radene med valg) */
+/* Sjekkliste */
+.category { margin-bottom: 25px; }
+.category h3 { border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 15px; }
+
 .item-row {
     background: var(--light-gray);
     padding: 15px;
@@ -62,7 +66,7 @@ input[type="text"] {
     border: 1px solid #eee;
     border-radius: 6px;
     display: flex;
-    justify-content: space-between; /* Spre navn og valg */
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -74,11 +78,7 @@ input[type="text"] {
     margin-bottom: 5px;
 }
 
-.radio-group {
-    display: flex;
-    gap: 15px;
-}
-
+.radio-group { display: flex; gap: 15px; }
 .radio-group label {
     font-size: 14px;
     cursor: pointer;
@@ -90,10 +90,37 @@ input[type="text"] {
     border: 1px solid #ddd;
     border-radius: 15px;
 }
-
 .radio-group label:hover { background: #eef; }
 
+/* NY DEL: Spørsmålsboks */
+.question-section {
+    background-color: var(--question-bg);
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #bbdefb;
+    margin-bottom: 25px;
+}
+.question-section input {
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #90caf9;
+}
+.radio-group-question {
+    display: flex;
+    gap: 20px;
+}
+.radio-label {
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex; 
+    align-items: center; 
+    gap: 5px;
+}
+
 /* Karakter */
+.grade-section { margin-top: 20px; }
 .grade-options {
     display: flex;
     gap: 15px;
