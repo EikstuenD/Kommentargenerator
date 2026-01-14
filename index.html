@@ -14,38 +14,38 @@
             <button onclick="toggleEditMode()" class="btn-edit">Rediger skjema</button>
         </header>
 
-        <!-- REDIGERINGSMODUS -->
+        <!-- REDIGERINGSMODUS (Skjult meny) -->
         <div id="editPanel" class="edit-panel hidden">
             <h3>Legg til nytt punkt</h3>
-            <p class="info-text">Fyll inn teksten som skal genereres for hvert nivå.</p>
+            <p class="info-text">Her bestemmer du hva som skal stå i teksten for de tre nivåene.</p>
             
             <input type="text" id="newCatName" placeholder="Kategorinavn (f.eks. Kroppsspråk)">
             <input type="text" id="newLabel" placeholder="Stikkord (f.eks. Blikkontakt)">
             
             <div class="input-row">
-                <input type="text" id="textLow" placeholder="Tekst ved Lav måloppnåelse">
-                <input type="text" id="textMed" placeholder="Tekst ved Middels måloppnåelse">
-                <input type="text" id="textHigh" placeholder="Tekst ved Høy måloppnåelse">
+                <input type="text" id="textLow" placeholder="Tekst ved Lav måloppnåelse (Må jobbes med)">
+                <input type="text" id="textMed" placeholder="Tekst ved Middels måloppnåelse (Godt)">
+                <input type="text" id="textHigh" placeholder="Tekst ved Høy måloppnåelse (Fremragende)">
             </div>
 
-            <button onclick="addItem()" class="btn-add">Legg til</button>
-            <button onclick="resetToDefault()" class="btn-danger">Tilbakestill alt til standard</button>
+            <button onclick="addItem()" class="btn-add">Legg til nytt punkt</button>
+            <button onclick="resetToDefault()" class="btn-danger">Slett alt og gjenopprett standard</button>
         </div>
 
-        <!-- ELEV INFO -->
+        <!-- INFO OM ELEV -->
         <div class="input-group">
             <input type="text" id="studentName" placeholder="Elevens navn">
-            <input type="text" id="topic" placeholder="Tema">
+            <input type="text" id="topic" placeholder="Tema for presentasjonen">
         </div>
 
-        <!-- DYNAMISK SKJEMA -->
+        <!-- HER KOMMER SJEKKLISTEN AUTOMATISK -->
         <div id="formContainer">
-            <!-- Fylles av script.js -->
+            <!-- Hvis du ser denne teksten, har ikke script.js lastet inn riktig ennå. -->
         </div>
 
         <!-- KARAKTER -->
         <div class="grade-section">
-            <h3>Karakter</h3>
+            <h3>Karakterforslag</h3>
             <div class="grade-options">
                 <label><input type="radio" name="grade" value="1"> 1</label>
                 <label><input type="radio" name="grade" value="2"> 2</label>
@@ -58,13 +58,13 @@
 
         <!-- KNAPPER -->
         <div class="buttons">
-            <button onclick="generateComment()" class="btn-generate">Generer tekst</button>
-            <button onclick="resetForm()" class="btn-reset">Nullstill</button>
+            <button onclick="generateComment()" class="btn-generate">Generer kommentar</button>
+            <button onclick="resetForm()" class="btn-reset">Nullstill skjema</button>
         </div>
 
         <!-- RESULTAT -->
         <div class="output-area">
-            <textarea id="resultOutput" rows="10"></textarea>
+            <textarea id="resultOutput" rows="12" placeholder="Her kommer kommentaren..."></textarea>
             <button onclick="copyText()" class="btn-copy">Kopier tekst</button>
         </div>
     </div>
