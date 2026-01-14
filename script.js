@@ -1,8 +1,7 @@
-// DATA-STRUKTUR
-// low: Må jobbes med | med: Greit | high: Bra
+// DATA STRUKTUR (Sjekklisten)
 const defaultData = [
     {
-        category: "Struktur",
+        category: "Struktur & Oppbygning",
         items: [
             { 
                 label: "Innledning", 
@@ -25,7 +24,7 @@ const defaultData = [
         ]
     },
     {
-        category: "Innhold",
+        category: "Faglig innhold",
         items: [
             { 
                 label: "Forståelse", 
@@ -75,7 +74,7 @@ window.onload = function() {
 };
 
 function loadData() {
-    // Endrer versjonsnavn til v4 for å tvinge frem den nye teksten med bedre flyt
+    // V4 brukes for å sikre at vi har riktig datastruktur
     const saved = localStorage.getItem('pres_data_v4'); 
     
     if (saved) {
@@ -90,7 +89,7 @@ function saveData() {
     renderForm();
 }
 
-// TEGNE SKJEMAET (Uendret logikk)
+// TEGNE SKJEMAET
 function renderForm() {
     const container = document.getElementById('formContainer');
     container.innerHTML = ""; 
@@ -129,64 +128,61 @@ function renderForm() {
     });
 }
 
-// GENERERE TEKST MED FLYT
+// GENERERE TEKST
 function generateComment() {
     const name = document.getElementById('studentName').value.trim() || "Eleven";
     const topic = document.getElementById('topic').value.trim() || "temaet";
     
     let fullText = `Hei ${name}.\n\nTakk for presentasjonen din om ${topic}. Her er min vurdering:\n\n`;
 
-    // Gå gjennom hver hovedkategori for å lage avsnitt
+    // 1. GÅ GJENNOM KATEGORIENE
     formData.forEach((cat, index) => {
         let categorySentences = [];
 
-        // Samle alle setninger som er krysset av i denne kategorien
         cat.items.forEach((item, itemIndex) => {
             const groupName = `grp_${index}_${itemIndex}`;
             const checked = document.querySelector(`input[name="${groupName}"]:checked`);
             
-            if (checked) {
-                const val = checked.value; 
-                if (item[val]) {
-                    categorySentences.push(item[val]);
-                }
+            if (checked && item[checked.value]) {
+                categorySentences.push(item[checked.value]);
             }
         });
 
-        // Hvis vi har setninger i denne kategorien, lim dem sammen
         if (categorySentences.length > 0) {
-            
-            // 1. Legg til en innledende frase basert på hvilken kategori det er (for flyt)
             let introPhrase = "";
             
-            // Logikk for binde-fraser basert på rekkefølgen i skjemaet
-            if (index === 0) {
-                introPhrase = "Når det gjelder struktur og oppbygning, ser jeg at ";
-            } else if (index === 1) {
-                introPhrase = "Ser vi på det faglige innholdet, ";
-            } else if (index === formData.length - 1) { // Siste kategori
-                introPhrase = "Til slutt vil jeg nevne fremføringen, hvor ";
-            } else {
-                introPhrase = `Når det gjelder ${cat.category.toLowerCase()}, `;
-            }
+            if (index === 0) introPhrase = "Når det gjelder struktur og oppbygning, ser jeg at ";
+            else if (index === 1) introPhrase = "Ser vi på det faglige innholdet, ";
+            else if (index === formData.length - 1) introPhrase = "Til slutt vil jeg nevne fremføringen, hvor ";
+            else introPhrase = `Når det gjelder ${cat.category.toLowerCase()}, `;
 
-            // 2. Slå sammen setningene. 
-            // Vi bruker ". " som skille, men fjerner stor bokstav i starten av setningene våre i dataen 
-            // slik at de passer etter intro-frasen.
-            
-            // Bygg avsnittet
             let paragraph = introPhrase + categorySentences.join(". Dessuten ");
-            
-            // Legg til punktum til slutt hvis det mangler
-            if (!paragraph.endsWith(".")) {
-                paragraph += ".";
-            }
-
+            if (!paragraph.endsWith(".")) paragraph += ".";
             fullText += paragraph + "\n\n";
         }
     });
 
-    // Avslutning og karakter
+    // 2. BEHANDLE SPØRSMÅLET
+    const qTopic = document.getElementById('questionTopic').value.trim();
+    const qResponse = document.querySelector('input[name="question_response"]:checked');
+
+    if (qResponse) {
+        // Bruker standardtekst "temaet" hvis læreren glemte å skrive inn spørsmålet
+        const topicText = qTopic ? qTopic : "temaet vi diskuterte";
+        let qText = "";
+
+        if (qResponse.value === "none") {
+            qText = `Du klarte dessverre ikke å svare på spørsmålet om ${topicText}.`;
+        } else if (qResponse.value === "part") {
+            qText = `Du svarte delvis på spørsmålet om ${topicText}, men her manglet det litt dybde.`;
+        } else if (qResponse.value === "full") {
+            qText = `I samtalen etterpå svarte du godt og reflektert på spørsmålet om ${topicText}.`;
+        }
+
+        fullText += "Oppfølgingsspørsmål: " + qText + "\n\n";
+    }
+
+    // 3. KARAKTER
     const grade = document.querySelector('input[name="grade"]:checked');
     if (grade) {
         fullText += `Alt i alt en gjennomføring som kvalifiserer til karakter: ${grade.value}`;
@@ -197,7 +193,7 @@ function generateComment() {
     document.getElementById('resultOutput').value = fullText;
 }
 
-// REDIGERING
+// REDIGERING OG RESET
 function toggleEditMode() {
     const panel = document.getElementById('editPanel');
     panel.style.display = panel.style.display === "block" ? "none" : "block";
@@ -206,8 +202,6 @@ function toggleEditMode() {
 function addItem() {
     const catName = document.getElementById('newCatName').value.trim();
     const label = document.getElementById('newLabel').value.trim();
-    
-    // Tips i placeholderne for å få god flyt
     const low = document.getElementById('textLow').value.trim();
     const med = document.getElementById('textMed').value.trim();
     const high = document.getElementById('textHigh').value.trim();
@@ -231,11 +225,11 @@ function addItem() {
     document.getElementById('textLow').value = "";
     document.getElementById('textMed').value = "";
     document.getElementById('textHigh').value = "";
-    alert("Lagt til! Husk å skrive setningene slik at de passer inn i en setning (med liten for-bokstav).");
+    alert("Lagt til!");
 }
 
 function resetToDefault() {
-    if(confirm("Er du sikker? Dette sletter alle endringer.")) {
+    if(confirm("Er du sikker? Sletter alle endringer.")) {
         localStorage.removeItem('pres_data_v4');
         loadData();
         renderForm();
@@ -245,6 +239,7 @@ function resetToDefault() {
 function resetForm() {
     document.getElementById('studentName').value = "";
     document.getElementById('topic').value = "";
+    document.getElementById('questionTopic').value = ""; // Tøm spørsmål
     document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
     document.getElementById('resultOutput').value = "";
 }
