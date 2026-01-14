@@ -40,9 +40,9 @@ const defaultData = [
             },
             { 
                 label: "Kildekritikk", 
-                low: "du viser at du ikke helt vet hvordan du skal være kildekritisk", 
-                med: "du viser delvis at du kan antyde om en kilde er god eller ikke", 
-                high: "du viser at du forstår kildekritikk ganske godt, og kan vurdere om kilder er gode eller ikke" 
+                low: "viser du at du ikke helt vet hvordan du skal være kildekritisk", 
+                med: "viser du delvis at du kan antyde om en kilde er god eller ikke", 
+                high: "viser du at du forstår kildekritikk ganske godt, og kan vurdere om kilder er gode eller ikke" 
             }
         ]
     },
