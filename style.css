@@ -1,13 +1,15 @@
 :root {
-    --primary: #333;
-    --bg: #f5f5f5;
-    --white: #fff;
-    --border: #ddd;
-    --blue: #2271b1;
+    --primary: #2c3e50;
+    --bg: #f4f6f8;
+    --white: #ffffff;
+    --border: #d1d5db;
+    --blue: #0056b3;
+    --green: #27ae60;
+    --light-gray: #f9fafb;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--bg);
     margin: 0;
     padding: 20px;
@@ -15,12 +17,12 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
     background: var(--white);
     padding: 30px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 header {
@@ -32,81 +34,102 @@ header {
     padding-bottom: 10px;
 }
 
-h1 { font-size: 22px; margin: 0; }
-h3 { font-size: 16px; margin: 20px 0 10px 0; color: #444; border-bottom: 1px solid #eee; padding-bottom: 5px;}
+h1 { font-size: 24px; margin: 0; }
+h3 { font-size: 18px; color: var(--blue); margin: 20px 0 10px 0; border-bottom: 1px solid #eee; padding-bottom: 5px; }
 
-/* Inputs */
-.input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+/* Input felter */
+.input-group { display: flex; gap: 15px; margin-bottom: 30px; }
 input[type="text"] {
     flex: 1;
-    padding: 10px;
-    border: 1px solid #999;
-    border-radius: 3px;
-    font-size: 14px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 15px;
 }
 
-/* Edit Panel */
-.edit-panel { background: #eef; padding: 15px; border: 1px solid #ccd; margin-bottom: 20px;}
+/* Redigeringsmeny */
+.edit-panel { background: #eef2f5; padding: 20px; border-radius: 6px; margin-bottom: 25px; border: 1px dashed #bbc; }
 .edit-panel input { width: 100%; margin-bottom: 10px; box-sizing: border-box; }
 .input-row { display: flex; gap: 10px; }
 .hidden { display: none; }
-.info-text { font-size: 12px; color: #666; margin-top: -10px; margin-bottom: 10px;}
+.info-text { font-size: 13px; color: #555; margin-top: -5px; margin-bottom: 15px; }
 
-/* Skjema-punkter (Radio buttons) */
+/* Selve skjemaet (Radene med valg) */
 .item-row {
-    background: #fafafa;
-    padding: 10px;
+    background: var(--light-gray);
+    padding: 15px;
     margin-bottom: 10px;
     border: 1px solid #eee;
-    border-radius: 3px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between; /* Spre navn og valg */
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.item-label { font-weight: bold; font-size: 14px; margin-bottom: 8px; display: block;}
+.item-label { 
+    font-weight: 600; 
+    font-size: 15px; 
+    min-width: 150px;
+    margin-bottom: 5px;
+}
 
 .radio-group {
     display: flex;
-    gap: 20px;
+    gap: 15px;
 }
+
 .radio-group label {
-    font-size: 13px;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
+    background: white;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
 }
 
-/* Grade Section */
+.radio-group label:hover { background: #eef; }
+
+/* Karakter */
 .grade-options {
     display: flex;
     gap: 15px;
     padding: 15px;
-    background: #f8f8f8;
+    background: #fafafa;
     border: 1px solid #eee;
+    border-radius: 4px;
 }
 .grade-options label { font-weight: bold; cursor: pointer; }
 
-/* Buttons */
-.buttons { margin-top: 25px; display: flex; gap: 10px; }
+/* Knapper */
+.buttons { margin-top: 30px; display: flex; gap: 10px; }
 button {
-    padding: 10px 20px;
+    padding: 12px 20px;
     cursor: pointer;
     border: none;
-    border-radius: 3px;
-    font-size: 14px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
 }
-.btn-generate { background: var(--blue); color: white; flex: 2; font-weight: bold;}
-.btn-reset { background: #666; color: white; }
-.btn-copy { background: #28a745; color: white; width: 100%; margin-top: 10px; }
-.btn-edit { background: none; color: #666; text-decoration: underline; padding: 0;}
-.btn-add { background: var(--blue); color: white; width: 100%; }
-.btn-danger { background: #d63638; color: white; width: 100%; margin-top: 5px; }
+.btn-generate { background: var(--blue); color: white; flex: 2; }
+.btn-generate:hover { background: #004494; }
+.btn-reset { background: #7f8c8d; color: white; }
+.btn-copy { background: var(--green); color: white; width: 100%; margin-top: 10px; }
+.btn-edit { background: none; color: #666; text-decoration: underline; padding: 0; font-weight: normal; font-size: 14px;}
+.btn-add { background: var(--blue); color: white; width: 100%; margin-top: 5px; }
+.btn-danger { background: #c0392b; color: white; width: 100%; margin-top: 10px; }
 
 textarea {
     width: 100%;
     margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #999;
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
     font-family: inherit;
     box-sizing: border-box; 
-    font-size: 14px;
+    font-size: 15px;
+    background: #fffef8;
 }
