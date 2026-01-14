@@ -16,8 +16,8 @@
 
         <!-- REDIGERINGSMODUS (Skjult meny) -->
         <div id="editPanel" class="edit-panel hidden">
-            <h3>Legg til nytt punkt</h3>
-            <p class="info-text">Her bestemmer du hva som skal stå i teksten for de tre nivåene.</p>
+            <h3>Legg til nytt sjekkpunkt</h3>
+            <p class="info-text">Her bestemmer du hva som skal stå i teksten for de tre nivåene i sjekklisten.</p>
             
             <input type="text" id="newCatName" placeholder="Kategorinavn (f.eks. Kroppsspråk)">
             <input type="text" id="newLabel" placeholder="Stikkord (f.eks. Blikkontakt)">
@@ -38,9 +38,22 @@
             <input type="text" id="topic" placeholder="Tema for presentasjonen">
         </div>
 
-        <!-- HER KOMMER SJEKKLISTEN AUTOMATISK -->
+        <!-- AUTOMATISK SJEKKLISTE -->
         <div id="formContainer">
-            <!-- Hvis du ser denne teksten, har ikke script.js lastet inn riktig ennå. -->
+            <!-- Fylles av script.js -->
+        </div>
+
+        <!-- NY DEL: OPPFØLGINGSSPØRSMÅL -->
+        <div class="question-section">
+            <h3>Oppfølgingsspørsmål</h3>
+            <p class="info-text">Hva spurte du om? (F.eks. "årsakene" eller "kildekritikk")</p>
+            <input type="text" id="questionTopic" placeholder="Skriv inn tema for spørsmålet her...">
+            
+            <div class="radio-group-question">
+                <label class="radio-label"><input type="radio" name="question_response" value="none"> Svarer ikke på</label>
+                <label class="radio-label"><input type="radio" name="question_response" value="part"> Svarer delvis på</label>
+                <label class="radio-label"><input type="radio" name="question_response" value="full"> Svarer på</label>
+            </div>
         </div>
 
         <!-- KARAKTER -->
