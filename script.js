@@ -1,5 +1,5 @@
 // DATA-STRUKTUR
-// low: Må jobbes med | med: Godt/Greit | high: Fremragende
+// low: Må jobbes med | med: Greit | high: Bra
 const defaultData = [
     {
         category: "Struktur",
